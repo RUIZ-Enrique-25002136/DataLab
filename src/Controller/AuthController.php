@@ -129,10 +129,8 @@ class AuthController
         }
 
         if (empty($errors)) {
-            if ($this->users->emailExists($email)) {
-                $errors[] = 'Cet email est déjà utilisé.';
-            } elseif ($this->users->loginExists($login)) {
-                $errors[] = 'Ce login est déjà utilisé.';
+            if ($this->users->emailExists($email) || $this->users->loginExists($login)) { //TESTER LE COUPLE EMAIL-LOGIN
+                $errors[] = 'Données de connexion invalides.';
             } else {
                 $token = bin2hex(random_bytes(32));
                 $created = $this->users->create($email, $login, $password, $token);
