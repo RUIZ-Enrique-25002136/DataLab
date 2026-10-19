@@ -2,6 +2,12 @@
 
 ## 1. Utilisateur lambda
 
+- En tant qu'utilisateur je veux pouvoir créer un compte afin d'avoir mon propre espace de travail avec mon travail enregistré
+
+- En tant qu'utilisateur je veux pouvoir changer mon mot de passe afin de récupérer l'accès à mon compte
+
+- En tant qu'utilisateur je veux pouvoir changer de pseudonyme afin de corriger de potentielles erreurs
+
 - En tant qu'utilisateur je veux pouvoir explorer des bases de données afin de visualiser le schéma et les données de celle-ci
 
 - En tant qu'utilisateur je veux pouvoir exectuter des requêtes afin de visualiser les résultats de mes recherches
