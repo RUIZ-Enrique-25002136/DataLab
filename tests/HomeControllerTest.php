@@ -3,12 +3,13 @@
 use PHPUnit\Framework\TestCase;
 use App\Controller\HomeController;
 use App\Core\Request;
+use App\Core\RouteCollection;
 
 final class HomeControllerTest extends TestCase
 {
     public function testIndexReturnsOkResponseWithWelcomeHtml(): void
     {
-        $controller = new HomeController(new \App\Core\View(dirname(__DIR__) . '/src/views', ['user' => null, 'currentPath' => '/']));
+        $controller = new HomeController(new \App\Core\View(dirname(__DIR__) . '/src/views', ['user' => null, 'currentPath' => '/']), new RouteCollection());
         $request = new Request([], [], ['REQUEST_METHOD' => 'GET', 'REQUEST_URI' => '/']);
 
         $response = $controller->index($request);
@@ -19,7 +20,7 @@ final class HomeControllerTest extends TestCase
 
     public function testLegalNoticeReturnsOkResponse(): void
     {
-        $controller = new HomeController(new \App\Core\View(dirname(__DIR__) . '/src/views', ['user' => null, 'currentPath' => '/']));
+        $controller = new HomeController(new \App\Core\View(dirname(__DIR__) . '/src/views', ['user' => null, 'currentPath' => '/']), new RouteCollection());
 
         $request = new Request([], [], ['REQUEST_METHOD' => 'GET', 'REQUEST_URI' => '/legal-notice']);
 

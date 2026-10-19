@@ -9,7 +9,7 @@ final class Router
      * @param View  $view      Used to render the 404 page
      */
     public function __construct(
-        private array $routes,
+        private RouteCollection $routes,
         private array $factories,
         private View $view,
     ) {}
@@ -21,18 +21,16 @@ final class Router
     {
         $allowedMethods = [];
 
-        foreach ($this->routes as [$method, $path, [$class, $action]]) {
-            if ($path !== $request->getPath()) {
+        foreach ($this->routes->all() as $route) {
+            if ($route->path !== $request->getPath()) {
                 continue;
             }
-
-            if ($method === $request->getMethod()) {
+            if($route->method === $request->getMethod()) {
+                [$class,$action] = $route->handler;
                 $controller = ($this->factories[$class])();
-
                 return $controller->$action($request);
             }
-
-            $allowedMethods[] = $method;   // le chemin existe, mais pas pour cette méthode
+            $allowedMethods[] = $route->method;   // le chemin existe, mais pas pour cette méthode
         }
 
         if ($allowedMethods !== []) {
