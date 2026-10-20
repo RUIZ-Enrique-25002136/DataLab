@@ -18,6 +18,7 @@ public readonly int $id,
 public readonly string $email,
 public readonly string $passwordHash,
 public readonly bool $verified,
+public readonly int $role = 1,
 public readonly ?string $login = null,
 public readonly ?string $createdAt = null,
 ) {

@@ -152,7 +152,7 @@ final class UserRepository
      * @return User
      */
     private function hydrate(array $row): User {
-        return new User($row['id'], $row['email'], $row['password'], (bool) $row['verified'], $row['login'], $row['created_at']);
+        return new User($row['id'], $row['email'], $row['password'], (bool) $row['verified'],$row['role'], $row['login'], $row['created_at']);
     }     // une ligne SQL -> un objet, en un seul endroit
 
     /**

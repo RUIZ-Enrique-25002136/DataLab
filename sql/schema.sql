@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(255) NOT NULL,
     login VARCHAR(50) DEFAULT NULL,
     password VARCHAR(255) NOT NULL,
+    role TINYINT DEFAULT '1' NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     verified BOOL DEFAULT FALSE,
     verify_token VARCHAR(64),
