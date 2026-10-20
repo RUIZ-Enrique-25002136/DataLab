@@ -25,7 +25,7 @@ if ($success) {
 } else {
 
     foreach ($errors as $error):
-        //<ul><li><?= htmlspecialchars($error)</li></ul>
+        echo '<ul><li>' . htmlspecialchars($error) . '</li></ul>';
     endforeach;
 
     if ($isTokenValid) {
