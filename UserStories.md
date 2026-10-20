@@ -2,7 +2,7 @@
 
 ## 1. Utilisateur lambda
 
-- En tant qu'utilisateur je veux pouvoir créer un compte afin d'avoir mon propre espace de travail avec mon travail enregistré
+- En tant qu'utilisateur je veux pouvoir créer un espace afin d'organiser et enregistrer mon travail
 
 - En tant qu'utilisateur je veux pouvoir changer mon mot de passe afin de récupérer l'accès à mon compte
 
@@ -25,6 +25,8 @@
 - En tant qu'enseignant je veux pouvoir séparer les élèves en groupes (année, parcours, TP, ...) afin de mieux organiser mes cours
 
 ## 3. Administrateur
+
+- En tant qu'administrateur je veux pouvoir créer des comptes afin de donner l'accès au site aux utilisateur de l'université
 
 - En tant qu'administrateur je veux pouvoir créer des profils enseignants et modération afin d'intégrer l'équipe pédagogique
 
