@@ -19,7 +19,7 @@
     <?php if (!empty($description)): ?>
         <meta name="description" content="<?= htmlspecialchars($description) ?>">
     <?php endif; ?>
-    <title><?= htmlspecialchars($title) ?> - SAE S3</title>
+    <title><?= htmlspecialchars($title) ?> - Datalab</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/x-icon" href="/assets/logo.png">
 </head>

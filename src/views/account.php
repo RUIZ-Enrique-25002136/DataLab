@@ -46,7 +46,7 @@ use App\Core\Csrf;
         <?php if($account->role == 1): ?>
             <div class="account-info-row">
                 <span class="account-info-label">Role : </span>
-                <span class="account-info-value">Élèvew</span>
+                <span class="account-info-value">Élève</span>
             </div>
         <?php endif; ?>
         <?php if ($account->createdAt !== null): ?>
@@ -56,6 +56,13 @@ use App\Core\Csrf;
             </div>
         <?php endif; ?>
     </div>
+
+    <?php if ($account->role == 3): ?>
+        <section class="account-section">
+            <h2>Administration</h2>
+            <p><a href="/adminRole" class="btn btn-secondary">Gérer les rôles des membres</a></p>
+        </section>
+    <?php endif; ?>
 
     <section class="account-section">
         <h2>Modifier mon Pseudo</h2>

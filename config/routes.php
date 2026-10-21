@@ -1,6 +1,7 @@
 <?php
 
 use App\Controller\AccountController;
+use App\Controller\AdminController;
 use App\Controller\AuthController;
 use App\Controller\PasswordController;
 use App\Controller\HomeController;
@@ -25,4 +26,6 @@ return [
     ['POST', '/account/delete', [AccountController::class, 'delete']],
     ['GET',  '/members', [MemberController::class, 'index'], 'Membres', true],
     ['GET',  '/sitemap', [HomeController::class, 'sitemap'], 'Plan du site', true],
+    ['GET',  '/adminRole', [AdminController::class, 'adminRole'], 'Admin role', false],
+    ['POST', '/adminRole', [AdminController::class, 'adminRole']],
 ];
