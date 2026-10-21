@@ -420,6 +420,34 @@ ze: 1.2rem;
   font-size: 0.9rem;
 }
 
+.admin-role-form {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+}
+
+.admin-role-form select {
+  padding: 0.4rem 0.65rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: var(--text-main);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-hover);
+  border-radius: 6px;
+}
+
+.admin-role-form button[type="submit"] {
+  width: auto;
+  margin-top: 0;
+}
+
 /* Pagination */
 .pagination {
   display: flex;

@@ -91,6 +91,23 @@ final class UserRepository
     }
 
     /**
+     * Modifie le rôle d'un compte (1 = Élève, 2 = Professeur, 3 = Admin).
+     *
+     * @param int $id   Identifiant du compte
+     * @param int $role Nouveau rôle (1, 2 ou 3)
+     * @return bool true si le rôle a été enregistré
+     */
+    public function updateRole(int $id, int $role): bool
+    {
+        $query = $this->pdo->prepare('UPDATE `users` SET `role` = :role WHERE `id` = :id');
+        try {
+            return $query->execute(['role' => $role, 'id' => $id]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    /**
      * Supprime définitivement un compte.
      *
      * @param int $id Identifiant du compte
@@ -152,7 +169,7 @@ final class UserRepository
      * @return User
      */
     private function hydrate(array $row): User {
-        return new User($row['id'], $row['email'], $row['password'], (bool) $row['verified'], $row['login'], $row['created_at']);
+        return new User((int) $row['id'], $row['email'], $row['password'], (bool) $row['verified'], (int) ($row['role'] ?? 1), $row['login'], $row['created_at']);
     }     // une ligne SQL -> un objet, en un seul endroit
 
     /**

@@ -31,6 +31,24 @@ use App\Core\Csrf;
             <span class="account-info-label">Pseudo</span>
             <span class="account-info-value"><?= htmlspecialchars($account->login ?? 'aucun') ?></span>
         </div>
+        <?php if($account->role == 3): ?>
+            <div class="account-info-row">
+                <span class="account-info-label">Role : </span>
+                <span class="account-info-value">Admin</span>
+            </div>
+        <?php endif; ?>
+        <?php if($account->role == 2): ?>
+            <div class="account-info-row">
+                <span class="account-info-label">Role : </span>
+                <span class="account-info-value">Professeur</span>
+            </div>
+        <?php endif; ?>
+        <?php if($account->role == 1): ?>
+            <div class="account-info-row">
+                <span class="account-info-label">Role : </span>
+                <span class="account-info-value">Élève</span>
+            </div>
+        <?php endif; ?>
         <?php if ($account->createdAt !== null): ?>
             <div class="account-info-row">
                 <span class="account-info-label">Inscrit le</span>
@@ -38,6 +56,13 @@ use App\Core\Csrf;
             </div>
         <?php endif; ?>
     </div>
+
+    <?php if ($account->role == 3): ?>
+        <section class="account-section">
+            <h2>Administration</h2>
+            <p><a href="/adminRole" class="btn btn-secondary">Gérer les rôles des membres</a></p>
+        </section>
+    <?php endif; ?>
 
     <section class="account-section">
         <h2>Modifier mon Pseudo</h2>
