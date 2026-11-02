@@ -11,7 +11,7 @@ use App\Core\Csrf;
 
 /**
  * Page « Mon compte », réservée aux membres connectés : voir ses informations,
- * modifier son login et supprimer son compte.
+ * modifier son login, modifier son mot de passe et supprimer son compte.
  */
 class AccountController
 {
@@ -68,6 +68,40 @@ class AccountController
     }
 
     /**
+     * Modifie le mot de passe du compte connecté (POST /account/password).
+     */
+    public function updatePassword(Request $request): Response
+    {
+        $user = $this->currentUser();
+        if ($user === null) {
+            return Response::redirect('/login');
+        }
+
+        $currentPassword = (string) $request->get('current_password', '');
+        $newPassword = (string) $request->get('new_password', '');
+        $confirmation = (string) $request->get('password_confirmation', '');
+        $errors = [];
+        $passwordSuccess = false;
+
+        if (!Csrf::check()) {
+            $errors[] = 'Session expirée, veuillez réessayer.';
+        } elseif (!$user->verifyPassword($currentPassword)) {
+            $errors[] = 'Le mot de passe actuel est incorrect.';
+        } elseif (strlen($newPassword) < 8) {
+            $errors[] = 'Le nouveau mot de passe doit contenir au moins 8 caractères.';
+        } elseif ($newPassword !== $confirmation) {
+            $errors[] = 'Les nouveaux mots de passe ne correspondent pas.';
+        } elseif ($this->users->updatePassword($user->id, $newPassword)) {
+            $passwordSuccess = true;
+            $user = $this->users->findById($user->id) ?? $user;
+        } else {
+            $errors[] = 'Une erreur est survenue.';
+        }
+
+        return $this->showAccount($user, $errors, false, $passwordSuccess);
+    }
+
+    /**
      * Supprime le compte connecté après vérification du mot de passe (POST /account/delete).
      */
     public function delete(Request $request): Response
@@ -106,18 +140,20 @@ class AccountController
     /**
      * Prépare la réponse de la page du compte.
      *
-     * @param User     $user    Utilisateur connecté
-     * @param string[] $errors  Messages d'erreur à afficher
-     * @param bool     $success true si le login vient d'être modifié
+     * @param User     $user            Utilisateur connecté
+     * @param string[] $errors          Messages d'erreur à afficher
+     * @param bool     $success         true si le login vient d'être modifié
+     * @param bool     $passwordSuccess true si le mot de passe vient d'être modifié
      */
-    private function showAccount(User $user, array $errors, bool $success): Response
+    private function showAccount(User $user, array $errors, bool $success, bool $passwordSuccess = false): Response
     {
         return $this->view->render('account', [
-            'account' => $user,
-            'errors'  => $errors,
-            'success' => $success,
-            'title'   => 'Mon compte',
-            'noindex' => true,
+            'account'         => $user,
+            'errors'          => $errors,
+            'success'         => $success,
+            'passwordSuccess' => $passwordSuccess,
+            'title'           => 'Mon compte',
+            'noindex'         => true,
         ]);
     }
 }

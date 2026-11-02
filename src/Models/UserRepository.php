@@ -108,6 +108,26 @@ final class UserRepository
     }
 
     /**
+     * Remplace le mot de passe d'un compte par son identifiant.
+     *
+     * @param int    $id            Identifiant du compte
+     * @param string $plainPassword Nouveau mot de passe en clair, haché avant l'enregistrement
+     * @return bool true si le mot de passe a été modifié
+     */
+    public function updatePassword(int $id, string $plainPassword): bool
+    {
+        $query = $this->pdo->prepare('UPDATE `users` SET `password` = :password WHERE `id` = :id');
+        try {
+            return $query->execute([
+                'password' => password_hash($plainPassword, PASSWORD_DEFAULT),
+                'id'       => $id,
+            ]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    /**
      * Supprime définitivement un compte.
      *
      * @param int $id Identifiant du compte

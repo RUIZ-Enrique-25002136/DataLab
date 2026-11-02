@@ -26,7 +26,7 @@
 <body>
 <header class="site-header">
     <div class="nav-container">
-        <a href="/" class="brand">SAE S3</a>
+        <a href="/" class="brand">Datalab</a>
         <nav class="nav-links">
             <a href="/" class="nav-item <?= $currentPath === '/' ? 'active' : '' ?>">Accueil</a>
             <?php if ($user === null): ?>
@@ -36,6 +36,7 @@
                 <span class="user-badge"><?= htmlspecialchars($user['email']) ?></span>
                 <a href="/members" class="nav-item <?= $currentPath === '/members' ? 'active' : '' ?>">Membres</a>
                 <a href="/account" class="nav-item <?= $currentPath === '/account' ? 'active' : '' ?>">Mon compte</a>
+
                 <a href="/logout" class="nav-item nav-logout">Déconnexion</a>
             <?php endif; ?>
         </nav>
