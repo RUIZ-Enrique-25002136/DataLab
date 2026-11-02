@@ -23,6 +23,7 @@ return [
     ['POST', '/reset-password', [PasswordController::class, 'reset']],
     ['GET',  '/account', [AccountController::class, 'show'], 'Mon compte', true],
     ['POST', '/account', [AccountController::class, 'updateLogin']],
+    ['POST', '/account/password', [AccountController::class, 'updatePassword']],
     ['POST', '/account/delete', [AccountController::class, 'delete']],
     ['GET',  '/members', [MemberController::class, 'index'], 'Membres', true],
     ['GET',  '/sitemap', [HomeController::class, 'sitemap'], 'Plan du site', true],

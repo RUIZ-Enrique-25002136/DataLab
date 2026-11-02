@@ -3,6 +3,7 @@
  * @var \App\Models\User $account
  * @var string[]         $errors
  * @var bool             $success
+ * @var bool             $passwordSuccess
  */
 use App\Core\Csrf;
 ?>
@@ -11,6 +12,9 @@ use App\Core\Csrf;
 
     <?php if ($success): ?>
         <div class="alert alert-success">Votre Pseudo a été modifié.</div>
+    <?php endif; ?>
+    <?php if (!empty($passwordSuccess)): ?>
+        <div class="alert alert-success">Votre mot de passe a été modifié.</div>
     <?php endif; ?>
     <?php if (!empty($errors)): ?>
         <div class="alert alert-danger">
@@ -73,6 +77,26 @@ use App\Core\Csrf;
                 <input type="text" id="login" name="login" value="<?= htmlspecialchars($account->login ?? '') ?>" minlength="3" maxlength="30" pattern="[A-Za-z0-9_\-]{3,30}" required>
             </p>
             <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </form>
+    </section>
+
+    <section class="account-section">
+        <h2>Modifier mon mot de passe</h2>
+        <form method="post" action="/account/password">
+            <input type="hidden" name="csrf" value="<?= htmlspecialchars(Csrf::token()) ?>">
+            <p>
+                <label for="current_password">Mot de passe actuel</label>
+                <input type="password" id="current_password" name="current_password" required>
+            </p>
+            <p>
+                <label for="new_password">Nouveau mot de passe</label>
+                <input type="password" id="new_password" name="new_password" minlength="8" required>
+            </p>
+            <p>
+                <label for="password_confirmation">Confirmer le nouveau mot de passe</label>
+                <input type="password" id="password_confirmation" name="password_confirmation" minlength="8" required>
+            </p>
+            <button type="submit" class="btn btn-primary">Changer le mot de passe</button>
         </form>
     </section>
 
