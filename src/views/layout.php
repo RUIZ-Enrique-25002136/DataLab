@@ -1,11 +1,26 @@
-<?php /**
-* Variables attendues par le layout.
-*
-* @var string     $content     HTML de la page, fourni par View::render()
-* @var string     $title       Titre de la page
-* @var string     $currentPath Chemin de la page courante
-* @var array|null $user        Utilisateur connecté (id, email) ou null
-*/
+<?php
+/** @var bool $success */
+/** @var string[] $errors */
+/** @var bool $isTokenValid */
+/** @var string $token */
+/**
+ * @var string $title
+ * @var array{id: int, email: string}|null $user
+ * @var string $currentPath
+ */
+
+use App\View\Input;
+use App\View\Form;
+use App\View\Layout;
+use App\View\Head;
+use App\View\Paragraph;
+use App\View\Link;
+use App\Core\Csrf;
+use App\View\Meta;
+use App\View\Button;
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">

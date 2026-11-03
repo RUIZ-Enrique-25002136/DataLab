@@ -10,6 +10,7 @@ final class Form extends Component
         private readonly string $method,
         private readonly string $action,
         private readonly array $children = [],
+        private readonly String $class = '',
     ){
     }
     public function render(): string
@@ -18,9 +19,10 @@ final class Form extends Component
         $action  = $this->e($this->action);
         $contenu = $this->renderAll($this->children);
         $token   = $this->e(Csrf::token());
+        $class    = $this->e($this->class);
 
         return <<<HTML
-            <form method="{$method}" action="{$action}">
+            <form method="{$method}" action="{$action}" class="{$class}">
                 <input type="hidden" name="csrf" value="{$token}">
                 {$contenu}
             </form>

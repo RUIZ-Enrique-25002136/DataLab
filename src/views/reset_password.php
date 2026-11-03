@@ -24,9 +24,9 @@ if ($success) {
             ], $currentPath);
 } else {
 
-    foreach ($errors as $error):
+    foreach ($errors as $error) {
         echo '<ul><li>' . htmlspecialchars($error) . '</li></ul>';
-    endforeach;
+    }
 
     if ($isTokenValid) {
         return new Layout($title, $user, [
